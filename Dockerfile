@@ -4,7 +4,9 @@ FROM python:${PYTHON_VERSION}-alpine
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 
 
-RUN addgroup -S -g 10001 app \
+
+RUN python -m pip uninstall -y setuptools wheel \
+    && addgroup -S -g 10001 app \
     && adduser -S -u 10001 -G app app
 
 WORKDIR /app
