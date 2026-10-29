@@ -5,9 +5,14 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 
 
 
-RUN python -m pip uninstall -y setuptools wheel \
-    && addgroup -S -g 10001 app \
-    && adduser -S -u 10001 -G app app
+
+RUN set -eux; \
+    python -m pip uninstall -y setuptools wheel pip; \
+    rm -rf /usr/local/lib/python3.13/ensurepip \
+           /usr/local/lib/python3.13/site-packages/pip \
+           /usr/local/lib/python3.13/site-packages/pip-*.dist-info; \
+    addgroup -S -g 10001 app; \
+    adduser -S -u 10001 -G app app
 
 WORKDIR /app
 
