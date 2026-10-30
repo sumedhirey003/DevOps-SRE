@@ -6,7 +6,10 @@ on:
       - main
     # Prevent an image-tag update PR from triggering another release.
     paths-ignore:
-      - "k8s/deployments.yaml"
+      - "k8s/**"
+      - "argocd/**"
+      - "monitoring/**"
+      - ".github/workflows/release.yml"
   workflow_dispatch:
 
 permissions:
